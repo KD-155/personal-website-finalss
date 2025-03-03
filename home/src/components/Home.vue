@@ -1,15 +1,9 @@
 <script setup>
-    import { createApp } from 'vue';
-    import Home from './Home.vue'; // Import Home.vue
-
-    const app = createApp(Home); // Directly use Home.vue as the root component
-    app.mount('#app'); // Mount the app to `#app`
-
-    import image1 from "@/assets/Gallery Image 1.jpg";
-    import image6 from "@/assets/Gallery Image 2.jpg";
-    import image3 from "@/assets/Gallery Image 3.jpg";
-    import image4 from "@/assets/Gallery Image 4.jpg";
-    import image2 from "@/assets/Gallery Image 5.jpg";
+    import image1 from "@/assets/image1.jpg";
+    import image6 from "@/assets/image6.jpg";
+    import image3 from "@/assets/image3.jpg";
+    import image4 from "@/assets/image4.jpg";
+    import image2 from "@/assets/image2.jpg";
 
     document.addEventListener('DOMContentLoaded', function() {
         const sendMessageButton = document.getElementById('sendMessage');
@@ -242,19 +236,19 @@
         <h2>Picture Gallery</h2>
         <div class="gallery-grid">
             <div class="gallery-card">
-                <img :src="image1.jpg" alt="Gallery Image 1">
+                <img :src="image1" alt="Gallery Image 1">
             </div>
             <div class="gallery-card">
-                <img :src="image6.jpg" alt="Gallery Image 2">
+                <img :src="image6" alt="Gallery Image 2">
             </div>
             <div class="gallery-card">
-                <img :src="image3.jpg" alt="Gallery Image 3">   
+                <img :src="image3" alt="Gallery Image 3">   
             </div>
             <div class="gallery-card">
-                <img :src="image4.jpg" alt="Gallery Image 4">
+                <img :src="image4" alt="Gallery Image 4">
             </div>
             <div class="gallery-card">
-                <img :src="image2.jpg" alt="Gallery Image 5">
+                <img :src="image2" alt="Gallery Image 5">
             </div>
         </div>
     </section>

@@ -1,11 +1,5 @@
 <script setup>
-    import { createApp } from 'vue';
-    import Home from './Home.vue';
-
-    const app = createApp(Home);
-    app.mount('#app'); 
-
-    import image7 from "@/assets/profile.jpg";
+    import image7 from "@/assets/image7.jpg";
 </script>
 
 <template>
@@ -46,7 +40,7 @@
             </div>            
         </div>
         <div class="home-img">
-            <img :src="image7.jpg" alt="Profile" class="profile-img">
+            <img :src="image7" alt="Profile" class="profile-img">
         </div>
     </section>
     <router-link to="/" class="btn">Get to know me more!</router-link>
