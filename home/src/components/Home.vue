@@ -6,7 +6,7 @@ import image4 from "@/assets/image4.jpg";
 import image2 from "@/assets/image2.jpg";
 import image7 from "@/assets/image7.jpg";
 import { ref, onMounted } from 'vue';
-import { supabase } from '../lib/supabaseClient';
+import { supabase } from 'src/lib/supabaseClient';
 
 const commentName = ref('');
 const commentText = ref('');
