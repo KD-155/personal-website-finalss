@@ -264,23 +264,9 @@
 
   <!--Comment Section-->  
   <section id="comments" class="comments">
-      <div class="comments-container">
-          <h2>Thoughts about my website?</h2>
-          <p>Let me know your feedback!</p>
-          <div v-if="error" class="error-message">{{ error }}</div>
-          <div class="comments-content">
-              <textarea v-model="commentName" placeholder="Your Name" required></textarea>
-          </div>
-          <div class="comments-content">
-              <textarea v-model="commentText" placeholder="Message" required></textarea>
-          </div>
+      
           <button @click="addComment">Submit</button>
-          <div id="comment-list">
-              <div v-for="comment in comments" :key="comment.id" class="comment-item">
-                  <strong>{{ comment.name }}:</strong> {{ comment.comment }}
-              </div>
-          </div>
-      </div>
+          
   </section>
 
   <!--Footer-->
