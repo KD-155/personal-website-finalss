@@ -355,11 +355,5 @@ async function addComment() {
 }
 
 onMounted(fetchComments);
-</script>
 
-<style>
-.error-message {
-  color: red;
-  margin-bottom: 10px;
-}
-</style>
+</script>
