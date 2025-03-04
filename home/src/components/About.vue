@@ -43,7 +43,7 @@
             <img :src="image7" alt="Profile" class="profile-img">
         </div>
     </section>
-      
+      <router-link to="/" class="btn">Get to know me more!</router-link>
     <footer>
         <p>© 2025 Kelly Dumbrique. All rights reserved.</p>
     </footer>
