@@ -329,13 +329,14 @@ async function addComment() {
     }
 
     try {
-        console.log("Submitting:", { name: commentName.value, comment: commentText.value });
+        console.log("Submitting:", { commentName: commentName.value, commentText: commentText.value });
+        console.log("User ID:", supabase.auth.user()?.id);
 
         const { data, error: supabaseError } = await supabase
             .from('comments')
             .insert([{
-                name: commentName.value,
-                comment: commentText.value,
+                commentName: commentName.value,
+                commentText: commentText.value,
                 created_by: supabase.auth.user()?.id || null,
             }]);
 
