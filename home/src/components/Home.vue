@@ -291,7 +291,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { supabase } from '@src/lib/supabaseClient'; 
+import { supabase } from '@/lib/supabaseClient'; 
 
 const commentName = ref('');
 const commentText = ref('');
