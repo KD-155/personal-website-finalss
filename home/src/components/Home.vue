@@ -291,12 +291,12 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { supabase } from 'src/lib/supabaseClient'; 
+import { supabase } from '@src/lib/supabaseClient'; 
 
 const commentName = ref('');
 const commentText = ref('');
-const comments = ref();
-const error = ref(null); // For displaying error messages
+const comments = ref([]);
+const error = ref(null);
 
 async function fetchComments() {
     error.value = null;
@@ -304,7 +304,8 @@ async function fetchComments() {
         const { data, error: supabaseError } = await supabase
             .from('comments')
             .select('*')
-            .order('created_at', { ascending: false }); // Order by newest first
+            .order('created_at', { ascending: false });
+
         if (supabaseError) {
             console.error('Error fetching comments:', supabaseError);
             error.value = 'Failed to load comments. Please try again later.';
@@ -312,46 +313,48 @@ async function fetchComments() {
             comments.value = data;
         }
     } catch (err) {
-        console.error('Error fetching comments:', err);
-        error.value = 'Failed to load comments. Please try again later.';
+        console.error('Unexpected error fetching comments:', err);
+        error.value = 'Unexpected error occurred.';
     }
 }
+
 
 async function addComment() {
-    console.log("addComment function triggered");
+    console.log("addComment triggered");
     error.value = null;
-    if (commentName.value && commentText.value) {
-        console.log("Comment Name:", commentName.value);
-        console.log("Comment Text:", commentText.value);
-        try {
-            const { data, error: supabaseError } = await supabase
-                .from('comments')
-                .insert([{
-                    name: commentName.value,
-                    comment: commentText.value,
-                    created_by: supabase.auth.user()?.id // Include created_by
-                }]);
-            if (supabaseError) {
-                console.error('Error adding comment:', supabaseError);
-                error.value = 'Failed to add comment. Please try again later.';
-            } else {
-                console.log("Supabase Insert Response:", data);
-                commentName.value = '';
-                commentText.value = '';
-                fetchComments();
-            }
-        } catch (err) {
-            console.error('Error adding comment:', err);
-            error.value = 'Failed to add comment. Please try again later.';
-        }
-    } else {
+
+    if (!commentName.value || !commentText.value) {
         alert('Please enter both your name and message.');
+        return;
+    }
+
+    try {
+        console.log("Submitting:", { name: commentName.value, comment: commentText.value });
+
+        const { data, error: supabaseError } = await supabase
+            .from('comments')
+            .insert([{
+                name: commentName.value,
+                comment: commentText.value,
+                created_by: supabase.auth.user()?.id || null,
+            }]);
+
+        if (supabaseError) {
+            console.error('Supabase Insert Error:', supabaseError);
+            error.value = 'Failed to add comment. Please try again later.';
+        } else {
+            console.log("Comment Added:", data);
+            commentName.value = '';
+            commentText.value = '';
+            fetchComments(); // Refresh
+        }
+    } catch (err) {
+        console.error('Unexpected Error:', err);
+        error.value = 'Unexpected error occurred.';
     }
 }
 
-onMounted(() => {
-    fetchComments();
-});
+onMounted(fetchComments);
 </script>
 
 <style>
